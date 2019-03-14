@@ -284,6 +284,9 @@ const flattenStyle = (message: Message): StyleById => {
       };
     });
   }, {});
+
+  styleById['themeStyle'] = message.config.themeStyle;
+
   return styleById;
 };
 
