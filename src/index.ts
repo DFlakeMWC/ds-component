@@ -275,7 +275,7 @@ const flattenStyle = (message: Message): StyleById => {
       if (styleById[configStyleElement.id] !== undefined) {
         throw new Error(
           `styleIds must be unique. Your styleId: '${
-            configStyleElement.id
+          configStyleElement.id
           }' is used more than once.`
         );
       }
@@ -359,7 +359,7 @@ export const subscribeToData = <T>(
       } else {
         console.error(
           `MessageType: ${
-            message.data.type
+          message.data.type
           } is not supported by this version of the library.`
         );
       }
