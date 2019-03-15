@@ -42,6 +42,7 @@ import {
   TableTables,
   TableTransform,
   TableType,
+  ThemeStyle,
 } from './types';
 
 // Make all exported types available to external users.
@@ -284,10 +285,11 @@ const flattenStyle = (message: Message): StyleById => {
       };
     });
   }, {});
-
-  styleById['themeStyle'] = message.config.themeStyle;
-
   return styleById;
+};
+
+const themeStyle = (message: Message): ThemeStyle => {
+  return message.config.themeStyle;
 };
 
 /**
@@ -299,6 +301,7 @@ export const tableTransform: TableTransform = (
   tables: tableFormatTable(message),
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
+  theme: themeStyle(message),
 });
 
 /**
@@ -308,6 +311,7 @@ export const objectTransform: ObjectTransform = (message: Message) => ({
   tables: objectFormatTable(message),
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
+  theme: themeStyle(message),
 });
 
 /*
