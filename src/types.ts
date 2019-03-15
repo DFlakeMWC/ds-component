@@ -140,6 +140,43 @@ export interface ConfigThemeStyle {
   }>;
 }
 
+export interface ThemeStyle {
+  fillColor: {
+    color: string;
+    opacity: number;
+  };
+  fontColor: {
+    color: string;
+    opacity: number;
+  };
+  accentFillColor: {
+    color: string;
+    opacity: number;
+  };
+  accentFontColor: {
+    color: string;
+    opacity: number;
+  };
+  fontFamily: string;
+  accentFontFamily: string;
+  increaseColor: {
+    color: string;
+    opacity: number;
+  };
+  decreaseColor: {
+    color: string;
+    opacity: number;
+  };
+  gridColor: {
+    color: string;
+    opacity: number;
+  };
+  seriesColor: Array<{
+    color: string;
+    opacity: number;
+  }>;
+}
+
 export enum FieldType {
   YEAR = 'YEAR',
   YEAR_QUARTER = 'YEAR_QUARTER',
@@ -543,6 +580,7 @@ export interface TableFormat {
   fields: FieldsByConfigId;
   style: StyleById;
   tables: TableTables;
+  theme: ThemeStyle;
 }
 
 export type TableTransform = (message: Message) => TableFormat;
@@ -567,6 +605,7 @@ export interface ObjectFormat {
   fields: FieldsByConfigId;
   style: StyleById;
   tables: ObjectTables;
+  theme: ThemeStyle;
 }
 
 export type ObjectTransform = (message: Message) => ObjectFormat;

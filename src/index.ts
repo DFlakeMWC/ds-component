@@ -42,6 +42,7 @@ import {
   TableTables,
   TableTransform,
   TableType,
+  ThemeStyle,
 } from './types';
 
 // Make all exported types available to external users.
@@ -290,6 +291,10 @@ const flattenStyle = (message: Message): StyleById => {
   return styleById;
 };
 
+const themeStyle = (message: Message): ThemeStyle => {
+  return message.config.themeStyle;
+};
+
 /**
  * The transform to use for data in a Table format. i.e. `[[1, 2, 3], [4, 5, 6]]`
  */
@@ -299,6 +304,7 @@ export const tableTransform: TableTransform = (
   tables: tableFormatTable(message),
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
+  theme: themeStyle(message),
 });
 
 /**
@@ -308,6 +314,7 @@ export const objectTransform: ObjectTransform = (message: Message) => ({
   tables: objectFormatTable(message),
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
+  theme: themeStyle(message),
 });
 
 /*
