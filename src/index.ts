@@ -34,12 +34,12 @@ import {
   PostMessage,
   Row,
   RowHeading,
-  RowThing,
   StyleById,
   SubscriptionsOptions,
   Table,
+  TableData,
   TableFormat,
-  TableTables,
+  Tables,
   TableTransform,
   TableType,
 } from './types';
@@ -211,9 +211,9 @@ const objectFormatTable = (message: Message): ObjectTables => {
 };
 
 /**
- * Formats tables into the `TableTables` format.
+ * Formats tables into the `Tables` format.
  */
-const tableFormatTable = (message: Message): TableTables => {
+const tableFormatTable = (message: Message): Tables => {
   const fieldsBy: FieldsByConfigId = fieldsByConfigId(message);
   const configIds = flattenConfigIds(message);
   const configIdIdx = {};
@@ -231,7 +231,7 @@ const tableFormatTable = (message: Message): TableTables => {
     }
   );
   const indexFields = fieldsById(message);
-  const tableTables: TableTables = {
+  const tableTables: Tables = {
     [TableType.DEFAULT]: {headers: [], rows: []},
   };
 
@@ -285,7 +285,7 @@ const flattenStyle = (message: Message): StyleById => {
     });
   }, {});
 
-  styleById['themeStyle'] = message.config.themeStyle;
+  styleById.themeStyle = message.config.themeStyle;
 
   return styleById;
 };

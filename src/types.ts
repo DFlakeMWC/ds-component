@@ -528,21 +528,21 @@ export interface StyleById {
   [styleId: string]: StyleValue;
 }
 
-export interface RowThing {
+export interface TableData {
   headers: RowHeading[];
   rows: Row[];
 }
 
-export interface TableTables {
-  [TableType.DEFAULT]: RowThing;
-  [TableType.COMPARISON]?: RowThing;
-  [TableType.SUMMARY]?: RowThing;
+export interface Tables {
+  [TableType.DEFAULT]: TableData;
+  [TableType.COMPARISON]?: TableData;
+  [TableType.SUMMARY]?: TableData;
 }
 
 export interface TableFormat {
   fields: FieldsByConfigId;
   style: StyleById;
-  tables: TableTables;
+  tables: Tables;
 }
 
 export type TableTransform = (message: Message) => TableFormat;
