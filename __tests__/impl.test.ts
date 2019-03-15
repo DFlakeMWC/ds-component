@@ -14,7 +14,41 @@
   limitations under the License.
 */
 import * as sut from '../src/index';
-import {ConfigDataElementType} from '../src/index';
+import {ConfigDataElementType, ThemeStyle} from '../src/index';
+
+const theme: ThemeStyle = {
+  fillColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  fontColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  accentFillColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  accentFontColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  fontFamily: 'blue',
+  accentFontFamily: 'blue',
+  increaseColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  decreaseColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  gridColor: {
+    color: 'blue',
+    opacity: 0.5,
+  },
+  seriesColor: [],
+};
 
 const testDimensionFields = (numRequested: number): sut.Field[] => {
   const fields = [
@@ -140,6 +174,7 @@ const testMessage = (
         },
       ],
       style,
+      themeStyle: theme,
     },
     fields,
     dataResponse: {
@@ -296,6 +331,7 @@ test('tableTransform empty style', () => {
       },
     },
     style: {},
+    theme,
   };
   const actual = sut.tableTransform(testMessage(2, 2, 0));
   expect(actual).toEqual(expected);
@@ -337,6 +373,7 @@ test('tableTransform works', () => {
     ],
   };
   const expected: sut.TableFormat = {
+    theme,
     fields: expectedFields,
     tables: {
       [sut.TableType.DEFAULT]: {
@@ -434,6 +471,7 @@ test('objectTransform works', () => {
         value: '4',
       },
     },
+    theme,
   };
   const actual: sut.ObjectFormat = sut.objectTransform(testMessage(2, 2, 2));
   expect(actual).toEqual(expected);
@@ -507,6 +545,7 @@ test('If elements are dim met dim dim, they have to be sorted specially.', () =>
   const messageDimMetDimDim: sut.Message = {
     type: sut.MessageType.RENDER,
     config: {
+      themeStyle: theme,
       style: [],
       data: [
         {

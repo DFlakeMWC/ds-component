@@ -12,9 +12,9 @@
     "build-ts": "tsc && tsc -m es6 --outDir lib-esm",
     "build-watch": "onchange \"{src,__tests__}/**/*.ts\" -- yarn build",
     "lint": "tslint -c tslint.json src/**/*.ts",
-    "test": "jest",
+    "test": "jest --no-cache",
     "prettier": "prettier --write \"{src,__tests__,examples}/**/*.ts\"",
-    "prettier-watch": "onchange \"{src,__tests__,examples}/**/*.ts\" -- yarn prettier",
+    "prettier:check": "prettier --check \"{src,__tests__,examples}/**/*.ts\"",
     "dev": "webpack --progress --colors --watch --env dev",
     "doc": "typedoc --out docs/ src/ && touch docs/.nojekyll"
   },
