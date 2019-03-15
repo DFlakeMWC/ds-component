@@ -58,10 +58,7 @@
   "directories": {
     "lib": "lib"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:googledatastudio/ds-component.git"
-  },
+  "repository": "googledatastudio/ds-component",
   "keywords": [
     "datastudio",
     "visualization",
