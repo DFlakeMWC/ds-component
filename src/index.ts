@@ -20,11 +20,16 @@ import {
   ConfigId,
   ConfigStyle,
   ConfigStyleElement,
+  DSInteractionData,
+  DSInteractionType,
   DSRowValue,
   Field,
   FieldId,
   FieldsByConfigId,
   FieldsById,
+  Interaction,
+  InteractionMessage,
+  InteractionType,
   Message,
   MessageType,
   ObjectRow,
@@ -34,15 +39,17 @@ import {
   PostMessage,
   Row,
   RowHeading,
+  SendInteraction,
   StyleById,
   SubscriptionsOptions,
   Table,
-  TableData,
   TableFormat,
   Tables,
   TableTransform,
   TableType,
   ThemeStyle,
+  ToDSMessageType,
+  VizReadyMessage,
 } from './types';
 
 // Make all exported types available to external users.
@@ -200,7 +207,6 @@ const joinObjectRow = (configIds: ConfigId[]) => (row: Row): ObjectRow => {
  */
 const objectFormatTable = (message: Message): ObjectTables => {
   const configIds = flattenConfigIds(message);
-  const indexFields = fieldsById(message);
   const objectTables: ObjectTables = {[TableType.DEFAULT]: []};
 
   message.dataResponse.tables.forEach((table: Table) => {
@@ -231,7 +237,6 @@ const tableFormatTable = (message: Message): Tables => {
       return heading;
     }
   );
-  const indexFields = fieldsById(message);
   const tableTables: Tables = {
     [TableType.DEFAULT]: {headers: [], rows: []},
   };
@@ -293,6 +298,30 @@ const themeStyle = (message: Message): ThemeStyle => {
   return message.config.themeStyle;
 };
 
+const mapInteractionTypes = (
+  dsInteraction: DSInteractionType
+): InteractionType => {
+  switch (dsInteraction) {
+    case DSInteractionType.FILTER:
+      return InteractionType.FILTER;
+  }
+};
+
+const transformDSInteraction = (message: Message): Interaction[] => {
+  const dsInteractions: DSInteractionData[] = message.config.interaction;
+  return dsInteractions.map(
+    (dsInteraction: DSInteractionData): Interaction => {
+      const interactions = dsInteraction.actions.map(mapInteractionTypes);
+      const value = dsInteraction.value.map(mapInteractionTypes);
+      return {
+        id: dsInteraction.id,
+        value,
+        interactions,
+      };
+    }
+  );
+};
+
 /**
  * The transform to use for data in a Table format. i.e. `[[1, 2, 3], [4, 5, 6]]`
  */
@@ -303,6 +332,7 @@ export const tableTransform: TableTransform = (
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
   theme: themeStyle(message),
+  interactions: transformDSInteraction(message),
 });
 
 /**
@@ -313,6 +343,7 @@ export const objectTransform: ObjectTransform = (message: Message) => ({
   fields: fieldsByConfigId(message),
   style: flattenStyle(message),
   theme: themeStyle(message),
+  interactions: transformDSInteraction(message),
 });
 
 /*
@@ -368,9 +399,30 @@ export const subscribeToData = <T>(
     window.addEventListener('message', onMessage);
     const componentId = getComponentId();
     // Tell DataStudio that the viz is ready to get events.
-    window.parent.postMessage({componentId, type: 'vizReady'}, '*');
+    const vizReadyMessage: VizReadyMessage = {
+      componentId,
+      type: ToDSMessageType.VIZ_READY,
+    };
+    window.parent.postMessage(vizReadyMessage, '*');
     return () => window.removeEventListener('message', onMessage);
   } else {
     throw new Error(`Only the built in transform functions are supported.`);
   }
+};
+
+/*
+ * Does the thing that interactions should do.
+ */
+export const sendInteraction: SendInteraction = (
+  actionId,
+  interaction,
+  data
+) => {
+  const interactionMessage: InteractionMessage = {
+    type: ToDSMessageType.INTERACTION,
+    componentId: getComponentId(),
+    id: actionId,
+    data,
+  };
+  window.parent.postMessage(interactionMessage, '*');
 };

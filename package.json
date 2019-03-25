@@ -11,7 +11,7 @@
     "build-js": "yarn prettier && webpack && NODE_ENV=production webpack",
     "build-ts": "tsc && tsc -m es6 --outDir lib-esm",
     "build-watch": "onchange \"{src,__tests__}/**/*.ts\" -- yarn build",
-    "lint": "tslint -c tslint.json src/**/*.ts",
+    "lint": "tslint -c tslint.json \"{src,__tests__}/**/*.ts\"",
     "test": "jest --no-cache",
     "prettier": "prettier --write \"{src,__tests__,examples}/**/*.ts\"",
     "prettier:check": "prettier --check \"{src,__tests__,examples}/**/*.ts\"",

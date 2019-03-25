@@ -31,6 +31,7 @@ export interface Config {
    */
   style: ConfigStyle[];
   themeStyle?: ConfigThemeStyle;
+  interaction: DSInteractionData[];
 }
 
 export interface Field {
@@ -516,6 +517,18 @@ export interface MaxResultsOptions {
   max: number;
 }
 
+export type DSInteractionData = DSInteractionFilterData;
+
+export interface DSInteractionFilterData {
+  actions: DSInteractionType[];
+  id: InteractionId;
+  value: DSInteractionType[];
+}
+
+export enum DSInteractionType {
+  FILTER = 'FILTER',
+}
+
 // Aliases
 export type FieldId = string;
 export type ConfigDataId = string;
@@ -581,6 +594,7 @@ export interface TableFormat {
   style: StyleById;
   tables: Tables;
   theme: ThemeStyle;
+  interactions: Interaction[];
 }
 
 export type TableTransform = (message: Message) => TableFormat;
@@ -606,6 +620,60 @@ export interface ObjectFormat {
   style: StyleById;
   tables: ObjectTables;
   theme: ThemeStyle;
+  interactions: Interaction[];
 }
 
 export type ObjectTransform = (message: Message) => ObjectFormat;
+
+export type ComponentId = string;
+
+export enum ToDSMessageType {
+  VIZ_READY = 'vizReady',
+  INTERACTION = 'vizAction',
+}
+
+export interface VizReadyMessage {
+  componentId: ComponentId;
+  type: ToDSMessageType.VIZ_READY;
+}
+
+// Interaction Types
+export interface InteractionMessage {
+  type: ToDSMessageType.INTERACTION;
+  id: InteractionId;
+  data: InteractionData;
+  componentId: ComponentId;
+}
+
+export interface SendInteraction {
+  // TODO - remove this once there is more than one interaction type.
+  // tslint:disable-next-line callable-types
+  (
+    actionId: InteractionId,
+    interaction: InteractionType.FILTER,
+    data: FilterInteractionData
+  ): void;
+  // TODO - When there are more Interaction types, the new ones should be added here with their own signature.
+}
+
+export type ConceptId = string;
+export type FilterParamValue = string | number | boolean;
+
+export interface FilterInteractionData {
+  concepts: ConceptId[];
+  values: FilterParamValue[][];
+}
+
+export enum InteractionType {
+  FILTER = 'FILTER',
+}
+
+export type InteractionData = FilterInteractionData;
+
+export type InteractionId = string;
+
+export interface Interaction {
+  interactions: InteractionType[];
+  id: InteractionId;
+  value: InteractionType[];
+}

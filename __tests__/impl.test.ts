@@ -14,7 +14,29 @@
   limitations under the License.
 */
 import * as sut from '../src/index';
-import {ConfigDataElementType, ThemeStyle} from '../src/index';
+import {
+  DSInteractionData,
+  DSInteractionType,
+  Interaction,
+  InteractionType,
+  ThemeStyle,
+} from '../src/index';
+
+const interaction: DSInteractionData[] = [
+  {
+    id: 'myInteractionId',
+    value: [DSInteractionType.FILTER],
+    actions: [DSInteractionType.FILTER],
+  },
+];
+
+const interactions: Interaction[] = [
+  {
+    id: 'myInteractionId',
+    value: [InteractionType.FILTER],
+    interactions: [InteractionType.FILTER],
+  },
+];
 
 const theme: ThemeStyle = {
   fillColor: {
@@ -143,6 +165,7 @@ const testMessage = (
   return {
     type: sut.MessageType.RENDER,
     config: {
+      interaction,
       data: [
         {
           id: 'configId',
@@ -306,6 +329,7 @@ test('tableTransform empty style', () => {
     ],
   };
   const expected: sut.TableFormat = {
+    interactions,
     fields: expectedFields,
     tables: {
       [sut.TableType.DEFAULT]: {
@@ -373,6 +397,7 @@ test('tableTransform works', () => {
     ],
   };
   const expected: sut.TableFormat = {
+    interactions,
     theme,
     fields: expectedFields,
     tables: {
@@ -415,6 +440,7 @@ test('tableTransform works', () => {
 
 test('objectTransform works', () => {
   const expected: sut.ObjectFormat = {
+    interactions,
     fields: {
       dimensions: [
         {
@@ -545,6 +571,7 @@ test('If elements are dim met dim dim, they have to be sorted specially.', () =>
   const messageDimMetDimDim: sut.Message = {
     type: sut.MessageType.RENDER,
     config: {
+      interaction,
       themeStyle: theme,
       style: [],
       data: [
