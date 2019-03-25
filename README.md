@@ -7,10 +7,6 @@ of community components for Google Data Studio. It can be used as a standalone
 library, or as a npm dependency. To learn more about Data Studio Community
 Components, visit [Data Studio Community Visualizations][dscv-devsite].
 
-## Documentation
-
-See [the doc directory][docs] for full documentation.
-
 ## Basic Usage
 
 `dscc` can be used through npm, or by copying the contents into the beginning of
