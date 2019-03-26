@@ -22,11 +22,11 @@ import {
   ThemeStyle,
 } from '../src/index';
 
-const interaction: DSInteractionData[] = [
+const dsInteractions: DSInteractionData[] = [
   {
     id: 'myInteractionId',
     value: [DSInteractionType.FILTER],
-    actions: [DSInteractionType.FILTER],
+    supportedActions: [DSInteractionType.FILTER],
   },
 ];
 
@@ -165,7 +165,7 @@ const testMessage = (
   return {
     type: sut.MessageType.RENDER,
     config: {
-      interaction,
+      interactions: dsInteractions,
       data: [
         {
           id: 'configId',
@@ -571,7 +571,7 @@ test('If elements are dim met dim dim, they have to be sorted specially.', () =>
   const messageDimMetDimDim: sut.Message = {
     type: sut.MessageType.RENDER,
     config: {
-      interaction,
+      interactions: dsInteractions,
       themeStyle: theme,
       style: [],
       data: [
