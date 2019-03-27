@@ -18,9 +18,9 @@ import {
   DSInteractionData,
   DSInteractionType,
   Interaction,
+  InteractionsById,
   InteractionType,
   ThemeStyle,
-  InteractionsById,
 } from '../src/index';
 
 const dsInteractions: DSInteractionData[] = [
