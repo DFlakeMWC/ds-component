@@ -35,4 +35,4 @@ npm login --registry https://wombat-dressing-room.appspot.com
 # Publish new version to npm
 npm publish --registry https://wombat-dressing-room.appspot.com
 # Push the new version
-git push
+git push origin master
