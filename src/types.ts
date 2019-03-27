@@ -594,7 +594,7 @@ export interface TableFormat {
   style: StyleById;
   tables: Tables;
   theme: ThemeStyle;
-  interactions: Interaction[];
+  interactions: InteractionsById;
 }
 
 export type TableTransform = (message: Message) => TableFormat;
@@ -620,7 +620,7 @@ export interface ObjectFormat {
   style: StyleById;
   tables: ObjectTables;
   theme: ThemeStyle;
-  interactions: Interaction[];
+  interactions: InteractionsById;
 }
 
 export type ObjectTransform = (message: Message) => ObjectFormat;
@@ -676,4 +676,8 @@ export interface Interaction {
   interactions: InteractionType[];
   id: InteractionId;
   value: InteractionType[];
+}
+
+export interface InteractionsById {
+  [configId: string]: Interaction;
 }
