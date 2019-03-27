@@ -679,5 +679,5 @@ export interface Interaction {
 }
 
 export interface InteractionsById {
-  [configId: string]: Interaction;
+  [interactionId: string]: Interaction;
 }
