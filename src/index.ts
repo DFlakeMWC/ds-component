@@ -308,10 +308,12 @@ const mapInteractionTypes = (
 };
 
 const transformDSInteraction = (message: Message): Interaction[] => {
-  const dsInteractions: DSInteractionData[] = message.config.interaction;
+  const dsInteractions: DSInteractionData[] = message.config.interactions;
   return dsInteractions.map(
     (dsInteraction: DSInteractionData): Interaction => {
-      const interactions = dsInteraction.actions.map(mapInteractionTypes);
+      const interactions = dsInteraction.supportedActions.map(
+        mapInteractionTypes
+      );
       const value = dsInteraction.value.map(mapInteractionTypes);
       return {
         id: dsInteraction.id,

@@ -31,7 +31,7 @@ export interface Config {
    */
   style: ConfigStyle[];
   themeStyle?: ConfigThemeStyle;
-  interaction: DSInteractionData[];
+  interactions: DSInteractionData[];
 }
 
 export interface Field {
@@ -520,7 +520,7 @@ export interface MaxResultsOptions {
 export type DSInteractionData = DSInteractionFilterData;
 
 export interface DSInteractionFilterData {
-  actions: DSInteractionType[];
+  supportedActions: DSInteractionType[];
   id: InteractionId;
   value: DSInteractionType[];
 }
