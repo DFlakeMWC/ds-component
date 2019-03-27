@@ -29,6 +29,7 @@ import {
   FieldsById,
   Interaction,
   InteractionMessage,
+  InteractionsById,
   InteractionType,
   Message,
   MessageType,
@@ -307,20 +308,22 @@ const mapInteractionTypes = (
   }
 };
 
-const transformDSInteraction = (message: Message): Interaction[] => {
+const transformDSInteraction = (message: Message): InteractionsById => {
   const dsInteractions: DSInteractionData[] = message.config.interactions;
-  return dsInteractions.map(
-    (dsInteraction: DSInteractionData): Interaction => {
+  return dsInteractions.reduce(
+    (acc: InteractionsById, dsInteraction: DSInteractionData) => {
       const interactions = dsInteraction.supportedActions.map(
         mapInteractionTypes
       );
       const value = dsInteraction.value.map(mapInteractionTypes);
-      return {
+      acc[dsInteraction.id] = {
         id: dsInteraction.id,
         value,
         interactions,
       };
-    }
+      return acc;
+    },
+    {}
   );
 };
 

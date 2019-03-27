@@ -18,6 +18,7 @@ import {
   DSInteractionData,
   DSInteractionType,
   Interaction,
+  InteractionsById,
   InteractionType,
   ThemeStyle,
 } from '../src/index';
@@ -37,6 +38,14 @@ const interactions: Interaction[] = [
     interactions: [InteractionType.FILTER],
   },
 ];
+
+const interactionsById: InteractionsById = {
+  myInteractionId: {
+    id: 'myInteractionId',
+    value: [InteractionType.FILTER],
+    interactions: [InteractionType.FILTER],
+  },
+};
 
 const theme: ThemeStyle = {
   fillColor: {
@@ -329,7 +338,7 @@ test('tableTransform empty style', () => {
     ],
   };
   const expected: sut.TableFormat = {
-    interactions,
+    interactions: interactionsById,
     fields: expectedFields,
     tables: {
       [sut.TableType.DEFAULT]: {
@@ -397,7 +406,7 @@ test('tableTransform works', () => {
     ],
   };
   const expected: sut.TableFormat = {
-    interactions,
+    interactions: interactionsById,
     theme,
     fields: expectedFields,
     tables: {
@@ -440,7 +449,7 @@ test('tableTransform works', () => {
 
 test('objectTransform works', () => {
   const expected: sut.ObjectFormat = {
-    interactions,
+    interactions: interactionsById,
     fields: {
       dimensions: [
         {
