@@ -1,3 +1,5 @@
+import {clearInteraction} from '.';
+
 export interface PostMessage extends MessageEvent {
   data: Message;
 }
@@ -654,6 +656,15 @@ export interface SendInteraction {
     data: FilterInteractionData
   ): void;
   // TODO - When there are more Interaction types, the new ones should be added here with their own signature.
+}
+
+export interface ClearInteraction {
+  // tslint:disable-next-line callable-types
+  (
+    actionId: InteractionId,
+    interaction: InteractionType.FILTER,
+    data: undefined
+  ): void;
 }
 
 export type ConceptId = string;

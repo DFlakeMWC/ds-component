@@ -14,6 +14,7 @@
   limitations under the License.
 */
 import {
+  ClearInteraction,
   ConfigData,
   ConfigDataElement,
   ConfigDataElementType,
@@ -428,6 +429,20 @@ export const sendInteraction: SendInteraction = (
     componentId: getComponentId(),
     id: actionId,
     data,
+  };
+  window.parent.postMessage(interactionMessage, '*');
+};
+
+/*
+ * Clears an interaction
+ */
+
+export const clearInteraction: ClearInteraction = (actionId, interaction) => {
+  const interactionMessage: InteractionMessage = {
+    type: ToDSMessageType.INTERACTION,
+    componentId: getComponentId(),
+    id: actionId,
+    data: undefined,
   };
   window.parent.postMessage(interactionMessage, '*');
 };
