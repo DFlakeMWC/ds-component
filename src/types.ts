@@ -524,7 +524,7 @@ export type DSInteractionData = DSInteractionFilterData;
 export interface DSInteractionFilterData {
   supportedActions: DSInteractionType[];
   id: InteractionId;
-  value: DSInteractionType[];
+  value?: DSInteractionType;
 }
 
 export enum DSInteractionType {
@@ -653,40 +653,32 @@ export interface SendInteraction {
   (
     actionId: InteractionId,
     interaction: InteractionType.FILTER,
-    data: FilterInteractionData
+    data: FilterInteractionData[]
   ): void;
   // TODO - When there are more Interaction types, the new ones should be added here with their own signature.
 }
 
-export interface ClearInteraction {
-  // tslint:disable-next-line callable-types
-  (
-    actionId: InteractionId,
-    interaction: InteractionType.FILTER,
-    data: undefined
-  ): void;
-}
-
+export type ClearInteraction = (actionId: InteractionId) => void;
 export type ConceptId = string;
-export type FilterParamValue = string | number | boolean;
+export type FilterParamValue = string;
 
 export interface FilterInteractionData {
-  concepts: ConceptId[];
-  values: FilterParamValue[][];
+  concept: ConceptId;
+  values: FilterParamValue[];
 }
 
 export enum InteractionType {
   FILTER = 'FILTER',
 }
 
-export type InteractionData = FilterInteractionData;
+export type InteractionData = FilterInteractionData[];
 
 export type InteractionId = string;
 
 export interface Interaction {
   interactions: InteractionType[];
   id: InteractionId;
-  value: InteractionType[];
+  value: InteractionType;
 }
 
 export interface InteractionsById {

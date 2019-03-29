@@ -26,23 +26,15 @@ import {
 const dsInteractions: DSInteractionData[] = [
   {
     id: 'myInteractionId',
-    value: [DSInteractionType.FILTER],
+    value: DSInteractionType.FILTER,
     supportedActions: [DSInteractionType.FILTER],
-  },
-];
-
-const interactions: Interaction[] = [
-  {
-    id: 'myInteractionId',
-    value: [InteractionType.FILTER],
-    interactions: [InteractionType.FILTER],
   },
 ];
 
 const interactionsById: InteractionsById = {
   myInteractionId: {
     id: 'myInteractionId',
-    value: [InteractionType.FILTER],
+    value: InteractionType.FILTER,
     interactions: [InteractionType.FILTER],
   },
 };

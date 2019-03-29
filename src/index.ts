@@ -52,6 +52,8 @@ import {
   ThemeStyle,
   ToDSMessageType,
   VizReadyMessage,
+  ObjectFormat,
+  FilterInteractionData,
 } from './types';
 
 // Make all exported types available to external users.
@@ -316,7 +318,7 @@ const transformDSInteraction = (message: Message): InteractionsById => {
       const interactions = dsInteraction.supportedActions.map(
         mapInteractionTypes
       );
-      const value = dsInteraction.value.map(mapInteractionTypes);
+      const value = mapInteractionTypes(dsInteraction.value);
       acc[dsInteraction.id] = {
         id: dsInteraction.id,
         value,
@@ -369,7 +371,7 @@ export const objectTransform: ObjectTransform = (message: Message) => ({
  *   unsubscribe();
  * }, 3000)
  * ```
-
+ *
  * Usage - objectTransform:
  * ```
  * var unsubscribe = dscc.subscribeToData(function(message) {
@@ -417,7 +419,22 @@ export const subscribeToData = <T>(
 };
 
 /*
- * Does the thing that interactions should do.
+ * Sends an interaction to Data Studio.
+ *
+ * Usage: (assuming your actionId is "barClick", and you want to filter on the first dimension)
+ * ```
+ * var drawViz = function(data) {
+ *   // ... Your viz code
+ *   var onBarClickHandler = function() {
+ *     var FILTER = InteractionType.FILTER;
+ *     var fieldId = data.fields.dimension[0].id;
+ *     var interactionData = [{concept: fieldId, values: ['USA', 'CANADA']}];
+ *     dscc.sendInteraction('barClick', FILTER, interactionData);
+ *   };
+ *   // ... The rest of your viz code, including using the clickHandler somewhere.
+ * };
+ * dscc.subscribeToData(drawViz, {transform: dscc.tableTransform});
+ * ```
  */
 export const sendInteraction: SendInteraction = (
   actionId,
@@ -434,10 +451,14 @@ export const sendInteraction: SendInteraction = (
 };
 
 /*
- * Clears an interaction
+ * Clears an interaction.
+ *
+ * Usage: (assuming your actionId is "barClick")
+ * ```
+ * dscc.clearInteraction("barClick")
+ * ```
  */
-
-export const clearInteraction: ClearInteraction = (actionId, interaction) => {
+export const clearInteraction: ClearInteraction = (actionId) => {
   const interactionMessage: InteractionMessage = {
     type: ToDSMessageType.INTERACTION,
     componentId: getComponentId(),
