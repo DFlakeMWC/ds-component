@@ -28,12 +28,14 @@ import {
   FieldId,
   FieldsByConfigId,
   FieldsById,
+  FilterInteractionData,
   Interaction,
   InteractionMessage,
   InteractionsById,
   InteractionType,
   Message,
   MessageType,
+  ObjectFormat,
   ObjectRow,
   ObjectTables,
   ObjectTransform,
@@ -52,8 +54,6 @@ import {
   ThemeStyle,
   ToDSMessageType,
   VizReadyMessage,
-  ObjectFormat,
-  FilterInteractionData,
 } from './types';
 
 // Make all exported types available to external users.
