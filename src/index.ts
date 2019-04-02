@@ -311,6 +311,10 @@ const mapInteractionTypes = (
 
 const transformDSInteraction = (message: Message): InteractionsById => {
   const dsInteractions: DSInteractionData[] = message.config.interactions;
+  // TODO - remove once interactions are live.
+  if (dsInteractions === undefined) {
+    return {};
+  }
   return dsInteractions.reduce(
     (acc: InteractionsById, dsInteraction: DSInteractionData) => {
       const interactions = dsInteraction.supportedActions.map(
