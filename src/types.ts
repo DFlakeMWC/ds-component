@@ -524,7 +524,7 @@ export type DSInteractionData = DSInteractionFilterData;
 export interface DSInteractionFilterData {
   supportedActions: DSInteractionType[];
   id: InteractionId;
-  value: DSInteractionType[];
+  value: DSInteractionType;
 }
 
 export enum DSInteractionType {
@@ -686,7 +686,7 @@ export type InteractionId = string;
 export interface Interaction {
   interactions: InteractionType[];
   id: InteractionId;
-  value: InteractionType[];
+  value: InteractionType;
 }
 
 export interface InteractionsById {

@@ -320,7 +320,7 @@ const transformDSInteraction = (message: Message): InteractionsById => {
       const interactions = dsInteraction.supportedActions.map(
         mapInteractionTypes
       );
-      const value = dsInteraction.value.map(mapInteractionTypes);
+      const value = mapInteractionTypes(dsInteraction.value);
       acc[dsInteraction.id] = {
         id: dsInteraction.id,
         value,
