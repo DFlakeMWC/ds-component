@@ -90,7 +90,7 @@ export const getHeight = (): number => document.documentElement.clientHeight;
  * ```
  */
 const getComponentId = (): string =>
-  window.frameElement.getAttribute('componentid');
+  window.frameElement.getAttribute('component-id');
 
 /**
  * Parses a `'\u00a0\u00a0'` delimited string into component parts. If any parts
