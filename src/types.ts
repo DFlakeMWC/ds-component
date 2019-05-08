@@ -686,7 +686,7 @@ export enum InteractionType {
 
 export interface InteractionValue {
   type: InteractionType;
-  data: FilterInteractionData;
+  data: InteractionData;
 }
 
 export type InteractionData = FilterInteractionData;
