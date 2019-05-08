@@ -524,11 +524,16 @@ export type DSInteractionData = DSInteractionFilterData;
 export interface DSInteractionFilterData {
   supportedActions: DSInteractionType[];
   id: InteractionId;
-  value: DSInteractionType;
+  value: DSInteractionFilterValue;
 }
 
 export enum DSInteractionType {
   FILTER = 'FILTER',
+}
+
+export interface DSInteractionFilterValue {
+  type: DSInteractionType;
+  data: InteractionData;
 }
 
 // Aliases
@@ -679,14 +684,19 @@ export enum InteractionType {
   FILTER = 'FILTER',
 }
 
+export interface InteractionValue {
+  type: InteractionType;
+  data: FilterInteractionData;
+}
+
 export type InteractionData = FilterInteractionData;
 
 export type InteractionId = string;
 
 export interface Interaction {
-  interactions: InteractionType[];
+  supportedActions: InteractionType[];
   id: InteractionId;
-  value: InteractionType;
+  value: InteractionValue;
 }
 
 export interface InteractionsById {

@@ -26,24 +26,28 @@ import {
 const dsInteractions: DSInteractionData[] = [
   {
     id: 'myInteractionId',
-    value: DSInteractionType.FILTER,
+    value: {
+      type: DSInteractionType.FILTER,
+      data: {
+        concepts: ['qt_vw8dc4c5wb', 'qt_oo9dc4c5wb'],
+        values: [['Morning', 'Tuesday']],
+      },
+    },
     supportedActions: [DSInteractionType.FILTER],
-  },
-];
-
-const interactions: Interaction[] = [
-  {
-    id: 'myInteractionId',
-    value: InteractionType.FILTER,
-    interactions: [InteractionType.FILTER],
   },
 ];
 
 const interactionsById: InteractionsById = {
   myInteractionId: {
     id: 'myInteractionId',
-    value: InteractionType.FILTER,
-    interactions: [InteractionType.FILTER],
+    supportedActions: [InteractionType.FILTER],
+    value: {
+      type: InteractionType.FILTER,
+      data: {
+        concepts: ['qt_vw8dc4c5wb', 'qt_oo9dc4c5wb'],
+        values: [['Morning', 'Tuesday']],
+      },
+    },
   },
 };
 
