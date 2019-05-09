@@ -325,7 +325,6 @@ const transformDSInteraction = (message: Message): InteractionsById => {
         data: dsInteraction.value.data,
       };
       acc[dsInteraction.id] = {
-        id: dsInteraction.id,
         value,
         supportedActions: interactions,
       };

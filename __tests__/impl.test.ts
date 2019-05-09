@@ -39,7 +39,6 @@ const dsInteractions: DSInteractionData[] = [
 
 const interactionsById: InteractionsById = {
   myInteractionId: {
-    id: 'myInteractionId',
     supportedActions: [InteractionType.FILTER],
     value: {
       type: InteractionType.FILTER,
