@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
+import * as parse from 'url-parse';
 import {
   ClearInteraction,
   ConfigData,
@@ -89,8 +90,18 @@ export const getHeight = (): number => document.documentElement.clientHeight;
  * console.log('My componentId is: ', myComponentId);
  * ```
  */
-const getComponentId = (): string =>
-  window.frameElement.getAttribute('component-id');
+export const getComponentId = (): string => {
+  const query = parse(window.location.href, true).query;
+  if (query.dscId) {
+    return query.dscId;
+  } else {
+    throw new Error(
+      'dscId must be in the query parameters. ' +
+        'This is a bug in ds-component, please file a bug: ' +
+        'https://github.com/googledatastudio/ds-component/issues/new'
+    );
+  }
+};
 
 /**
  * Parses a `'\u00a0\u00a0'` delimited string into component parts. If any parts
@@ -430,11 +441,12 @@ export const sendInteraction: SendInteraction = (
   interaction,
   data
 ) => {
+  const componentId = getComponentId();
   const interactionMessage: InteractionMessage = {
     type: ToDSMessageType.INTERACTION,
-    componentId: getComponentId(),
     id: actionId,
     data,
+    componentId,
   };
   window.parent.postMessage(interactionMessage, '*');
 };
@@ -444,11 +456,5 @@ export const sendInteraction: SendInteraction = (
  */
 
 export const clearInteraction: ClearInteraction = (actionId, interaction) => {
-  const interactionMessage: InteractionMessage = {
-    type: ToDSMessageType.INTERACTION,
-    componentId: getComponentId(),
-    id: actionId,
-    data: undefined,
-  };
-  window.parent.postMessage(interactionMessage, '*');
+  sendInteraction(actionId, interaction, undefined);
 };

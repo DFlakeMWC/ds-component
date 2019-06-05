@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
+import * as parse from 'url-parse';
 import * as sut from '../src/index';
 import {
   DSInteractionData,
@@ -22,6 +23,7 @@ import {
   InteractionType,
   ThemeStyle,
 } from '../src/index';
+jest.mock('url-parse');
 
 const dsInteractions: DSInteractionData[] = [
   {
@@ -273,6 +275,8 @@ test('parseImage one fields present', () => {
 });
 
 test('subscribeToData works', () => {
+  const mockParse = parse as any;
+  mockParse.mockReturnValueOnce({query: {dscId: 'my-id'}});
   const message = testMessage(1, 1, 1);
   const addEventListenerMock = jest.fn((event, cb) => {
     if (event === 'message') {
@@ -679,4 +683,20 @@ test('If elements are dim met dim dim, they have to be sorted specially.', () =>
   const rows = actual.tables[sut.TableType.DEFAULT].rows;
   expect(rows[0][0]).toEqual('google');
   expect(rows[0][3]).toEqual(2105);
+});
+
+describe('when window.location mocked', () => {
+  const mockParse = parse as any;
+
+  test('finds componentId when defined', () => {
+    mockParse.mockReturnValueOnce({query: {dscId: 'my-id'}});
+    expect(sut.getComponentId()).toEqual('my-id');
+  });
+
+  test('throws with componentId is not defined', () => {
+    mockParse.mockReturnValueOnce({query: {}});
+    expect(() => sut.getComponentId()).toThrow(
+      'dscId must be in the query parameters'
+    );
+  });
 });

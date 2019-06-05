@@ -630,9 +630,9 @@ export interface ObjectFormat {
   interactions: InteractionsById;
 }
 
-export type ObjectTransform = (message: Message) => ObjectFormat;
-
 export type ComponentId = string;
+
+export type ObjectTransform = (message: Message) => ObjectFormat;
 
 export enum ToDSMessageType {
   VIZ_READY = 'vizReady',
@@ -640,8 +640,8 @@ export enum ToDSMessageType {
 }
 
 export interface VizReadyMessage {
-  componentId: ComponentId;
   type: ToDSMessageType.VIZ_READY;
+  componentId: ComponentId;
 }
 
 // Interaction Types
