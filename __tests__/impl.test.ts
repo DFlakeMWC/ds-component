@@ -27,12 +27,16 @@ jest.mock('url-parse');
 
 const dsInteractions: DSInteractionData[] = [
   {
-    id: 'myInteractionId',
+    id: 'interactionsConfigId',
     value: {
       type: DSInteractionType.FILTER,
       data: {
-        concepts: ['qt_vw8dc4c5wb', 'qt_oo9dc4c5wb'],
-        values: [['Morning', 'Tuesday']],
+        concepts: ['qt_h6oibrb6wb', 'qt_i6oibrb6wb'],
+        values: [
+          ['Afternoon', 'Sunday'],
+          ['Afternoon', 'Thursday'],
+          ['Morning', 'Tuesday'],
+        ],
       },
     },
     supportedActions: [DSInteractionType.FILTER],
@@ -40,15 +44,19 @@ const dsInteractions: DSInteractionData[] = [
 ];
 
 const interactionsById: InteractionsById = {
-  myInteractionId: {
-    supportedActions: [InteractionType.FILTER],
+  interactionsConfigId: {
     value: {
       type: InteractionType.FILTER,
       data: {
-        concepts: ['qt_vw8dc4c5wb', 'qt_oo9dc4c5wb'],
-        values: [['Morning', 'Tuesday']],
+        concepts: ['qt_h6oibrb6wb', 'qt_i6oibrb6wb'],
+        values: [
+          ['Afternoon', 'Sunday'],
+          ['Afternoon', 'Thursday'],
+          ['Morning', 'Tuesday'],
+        ],
       },
     },
+    supportedActions: [InteractionType.FILTER],
   },
 };
 

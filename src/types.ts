@@ -695,7 +695,7 @@ export type InteractionId = string;
 
 export interface Interaction {
   supportedActions: InteractionType[];
-  value: InteractionValue;
+  value: InteractionValue | {};
 }
 
 export interface InteractionsById {
