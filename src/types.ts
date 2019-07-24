@@ -107,74 +107,74 @@ export interface ConfigStyle {
 }
 
 export interface ConfigThemeStyle {
-  fillColor: {
+  themeFillColor: {
     color: string;
     opacity: number;
   };
-  fontColor: {
+  themeFontColor: {
     color: string;
     opacity: number;
   };
-  accentFillColor: {
+  themeAccentFillColor: {
     color: string;
     opacity: number;
   };
-  accentFontColor: {
+  themeAccentFontColor: {
     color: string;
     opacity: number;
   };
-  fontFamily: string;
-  accentFontFamily: string;
-  increaseColor: {
+  themeFontFamily: string;
+  themeAccentFontFamily: string;
+  themeIncreaseColor: {
     color: string;
     opacity: number;
   };
-  decreaseColor: {
+  themeDecreaseColor: {
     color: string;
     opacity: number;
   };
-  gridColor: {
+  themeGridColor: {
     color: string;
     opacity: number;
   };
-  seriesColor: Array<{
+  themeSeriesColor: Array<{
     color: string;
     opacity: number;
   }>;
 }
 
 export interface ThemeStyle {
-  fillColor: {
+  themeFillColor: {
     color: string;
     opacity: number;
   };
-  fontColor: {
+  themeFontColor: {
     color: string;
     opacity: number;
   };
-  accentFillColor: {
+  themeAccentFillColor: {
     color: string;
     opacity: number;
   };
-  accentFontColor: {
+  themeAccentFontColor: {
     color: string;
     opacity: number;
   };
-  fontFamily: string;
-  accentFontFamily: string;
-  increaseColor: {
+  themeFontFamily: string;
+  themeAccentFontFamily: string;
+  themeIncreaseColor: {
     color: string;
     opacity: number;
   };
-  decreaseColor: {
+  themeDecreaseColor: {
     color: string;
     opacity: number;
   };
-  gridColor: {
+  themeGridColor: {
     color: string;
     opacity: number;
   };
-  seriesColor: Array<{
+  themeSeriesColor: Array<{
     color: string;
     opacity: number;
   }>;
