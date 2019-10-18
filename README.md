@@ -1,5 +1,12 @@
 # dscc - Google Data Studio Community Component Helper Library
 
+## STATUS: ARCHIVED
+
+Note - the code in this repository has moved to [dscc-gen]. This will be
+archived as a read-only repository for the time being.
+
+--------
+
 <a href="https://travis-ci.org/googledatastudio/ds-component"><img src="https://travis-ci.org/googledatastudio/ds-component.svg?branch=master" alt="Build Status"></a>
 
 `dscc` (Data Studio Community Component) is a library to help with the building
@@ -78,3 +85,4 @@ cat 'yourComponentFile.js' >> release.js
 
 [dscv-devsite]: https://developers.google.com/datastudio/visualization/
 [docs]: https://googledatastudio.github.io/ds-component/
+[dscc-gen]: https://github.com/googledatastudio/dscc-gen
